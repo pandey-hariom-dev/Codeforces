@@ -1,4 +1,5 @@
-n, k = int(input()).split(" ")
+n, k = input().split(" ")
+n, k = int(n), int(k)
 scores = []
 for i in range(0, n):
     scores[i] = int(input())
