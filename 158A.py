@@ -71,4 +71,4 @@ for _ in range(t):
             best = max(best, dp[l][r])
 
     ans = (n - total - best) // 2
-    print(ans)
+    print(ans-1)
