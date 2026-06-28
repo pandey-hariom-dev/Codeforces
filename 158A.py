@@ -1,8 +1,9 @@
 n, k = input().split(" ")
 n, k = int(n), int(k)
-scores = [int]
+scores = []
 for i in range(0, n):
-    scores[i] = int(input())
+    scores[i] = i
+print(scores)
 
 
 
