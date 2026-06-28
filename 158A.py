@@ -14,57 +14,29 @@
 #     print(time if time != float('inf') else -1)
 
 
-import sys
 
-MOD = 1000000007
-MAXK = 200000
+def solve():
+    t = int(input())
 
-fac = [1] * (MAXK + 5)
-for i in range(1, MAXK + 5):
-    fac[i] = fac[i - 1] * i % MOD
+    for _ in range(t):
+        n = int(input())
 
-ifac = [1] * (MAXK + 5)
-ifac[MAXK + 4] = pow(fac[MAXK + 4], MOD - 2, MOD)
-for i in range(MAXK + 4, 0, -1):
-    ifac[i - 1] = ifac[i] * i % MOD
+        x = n
+        ans = 0
 
+        p = 2
+        while p * p <= x:
+            if x % p == 0:
+                cnt = 0
+                while x % p == 0:
+                    x //= p
+                    cnt += 1
+                ans += cnt
+            p += 1
 
-def C(n, r):
-    if r < 0 or r > n:
-        return 0
-    return fac[n] * ifac[r] % MOD * ifac[n - r] % MOD
+        if x > 1:
+            ans += 1
 
+        print(ans)
 
-t = int(sys.stdin.readline())
-
-for _ in range(t):
-    n, k = map(int, sys.stdin.readline().split())
-
-    if k == 1:
-        print(1)
-        continue
-
-    bits = []
-    x = k
-
-    while x:
-        bits.append(x & 1)
-        x >>= 1
-
-    m = len(bits) - 1
-
-    if n < m:
-        print(0)
-        continue
-
-    ans = 1
-    rem = n - m
-
-    ones = 0
-    for i in range(m):
-        if bits[i]:
-            ones += 1
-
-    ans = C(rem + ones, ones)
-
-    print(ans % MOD)
+solve()
