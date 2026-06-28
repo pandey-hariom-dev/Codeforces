@@ -15,28 +15,60 @@
 
 
 
-def solve():
-    t = int(input())
+import sys
 
-    for _ in range(t):
-        n = int(input())
+input = sys.stdin.readline
 
-        x = n
-        ans = 0
+t = int(input())
 
-        p = 2
-        while p * p <= x:
-            if x % p == 0:
-                cnt = 0
-                while x % p == 0:
-                    x //= p
-                    cnt += 1
-                ans += cnt
-            p += 1
+for _ in range(t):
+    n = int(input())
+    s = input().strip()
 
-        if x > 1:
-            ans += 1
+    dp = [[-10**9] * n for _ in range(n)]
 
-        print(ans)
+    for i in range(n):
+        if s[i] == 'T':
+            dp[i][i] = -1
+        elif s[i] == 'F':
+            dp[i][i] = 1
+        else:  # N
+            dp[i][i] = 1
 
-solve()
+    for length in range(2, n + 1):
+        for l in range(n - length + 1):
+            r = l + length - 1
+
+            if s[l] == 'T':
+                left = -1
+            elif s[l] == 'F':
+                left = 1
+            else:
+                left = 1
+
+            if s[r] == 'T':
+                right = -1
+            elif s[r] == 'F':
+                right = 1
+            else:
+                right = 1
+
+            dp[l][r] = max(
+                left + dp[l + 1][r],
+                right + dp[l][r - 1]
+            )
+
+    total = 0
+    for c in s:
+        if c == 'T':
+            total += 1
+        elif c == 'F':
+            total -= 1
+
+    best = 0
+    for l in range(n):
+        for r in range(l, n):
+            best = max(best, dp[l][r])
+
+    ans = (n - total - best) // 2
+    print(ans)
