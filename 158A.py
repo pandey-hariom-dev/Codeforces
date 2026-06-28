@@ -1,1 +1,2 @@
-n = int(input())
+n, k = int(input()).split(" ")
+
