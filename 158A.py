@@ -1,10 +1,9 @@
-n, k = input().split(" ")
-n, k = int(n), int(k)
-scores = []
+n = int(input())
+c = int(input())
+a = []
+b = []
 for i in range(0, n):
-    scores.append(scores[0], i)
-print(scores)
-
-
-
-
+    a.append(int(input()))
+    b.append(int(input()))
+print(a)
+print(b)
