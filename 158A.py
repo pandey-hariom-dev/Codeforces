@@ -1,5 +1,5 @@
-n = int(input())
-c = int(input())
+n, c = input().split(" ")
+n, c = int(n), int(c)
 
 a = []
 b = []
